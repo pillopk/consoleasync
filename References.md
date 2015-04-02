@@ -3,7 +3,8 @@ ConsoleAsync
 ConsoleAsync is a static class needed for create/destroy console, for worker management cicle 
 and helper method to make operation to all existing consoles
 
-##Properties
+
+###Properties
 
 ```c#
 string AvailableInputChars { get; set; }
@@ -15,7 +16,8 @@ IConsole ActiveConsole { get; }
 ```
 This property return the actual visible console
 
-##Methods
+
+###Methods
 
 ```c#
  IConsole CreateConsole(string consoleName)
