@@ -269,12 +269,80 @@ Scroll the current view to the bottom
 
 ------------------------------------------------------------------------
 ##IConsoleWorker
-blah blah blah blah blah blah blah blah
+This interface manage the worker instance
+
+####Properties
+
+#####IConsoleWorker.State
+```c#
+WorkerStateEnum State { get; }
+```
+Return the state of the worker (Stopped, Running, Suspended)
+
+####Methods
+
+#####IConsoleWorker.State
+```c#
+void Start()
+```
+Start the relative worker by call OnStart method then run the execution cicle
+
+#####IConsoleWorker.Stop
+```c#
+void Stop()
+```
+Stop the execution cicle the call OnStop method
+
+#####IConsoleWorker.Suspend
+```c#
+void Suspend()
+```
+Suspend temporarely the execution cicle
+
+#####IConsoleWorker.Resume
+```c#
+void Resume()
+```
+Resume execution cicle
+
+#####IConsoleWorker.Execute
+```c#
+void Execute()
+```
+Raise OnExecute method immediately
 
 
 ------------------------------------------------------------------------
 ##ConsoleWorker
-blah blah blah blah blah blah blah blah
+Abstract class for the creation of custom worker, all method and properties must be overrided
+
+####Properties
+
+#####ConsoleWorker.IntervalBetweenExecution
+```c#
+TimeSpan IntervalBetweenExecution { get; }
+```
+Value returned from this property is the interval between call of OnExecute method
+
+####Methods
+
+#####ConsoleWorker.OnStart
+```c#
+void OnStart(IConsoleWriter writer);
+```
+Called before start of the execution cicle
+
+#####ConsoleWorker.OnExecute
+```c#
+void OnExecute(IConsoleWriter writer, TimeSpan elapsed);
+```
+Called at interval specified by IntervalBetweenExecution property, parameter elapsed indicate exact interval occourred from previous call
+
+#####ConsoleWorker.OnStop
+```c#
+void OnStop(IConsoleWriter writer, TimeSpan elapsed);
+```
+Called at the stop of execution cicle parameter elapsed indicate exact interval occourred from previous call
 
 
 
