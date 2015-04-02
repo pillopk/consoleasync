@@ -76,7 +76,7 @@ This fragment add 'quit' command to a console, when typed the ConsoleAsync.Quit(
 	ConsoleAsync.Run();
 Execute the console cicle, the program execution is stopped on this method until ConsoleAsync.Quit() is called
 
->Note that the same functionality will be achieved with more short expression syntax
+>Note that the same functionality will be achieved with expression syntax
 
 	IConsole console = ConsoleAsync.CreateConsole("Getting Started");
 	console.Execute(writer => writer.Info("Getting started console").NewLine());
