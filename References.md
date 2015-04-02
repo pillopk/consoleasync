@@ -18,9 +18,9 @@ This property return the actual visible console
 ##Methods
 
 ```c#
-[IConsole](#IConsole) CreateConsole(string consoleName)
+ IConsole CreateConsole(string consoleName)
 ```
-Create a new console with specified name and return the control object
+Create a new console with specified name and return [IConsole](#IConsole) interface
 
 ```c#
 void DestroyConsole(string consoleName)
@@ -33,12 +33,12 @@ void ShowConsole(string consoleName)
 Make console with specified name visible
 
 ```c#
-IEnumerable<[IConsole](#IConsole)> EnumerateConsoles()
+IEnumerable<IConsole> EnumerateConsoles()
 ```
-Return anumeration of consoles
+Return anumeration of existing [IConsole](#IConsole)
 
 ```c#
-void AddCommandToAllConsole(string commandText, Action<[IConsoleWriter](#IConsoleWriter), string[]> action)
+void AddCommandToAllConsole(string commandText, Action<IConsoleWriter, string[]> action)
 ```
 Add a command to all consoles, with text specified in commandText parameter. The associated action require an [IConsoleWriter](#IConsoleWriter) parameter to write in selected console and a string array that contain all the parameter passed to a command through input. If command already exist in one console the method throws an exception
 
@@ -48,7 +48,7 @@ void RemoveCommandFromAllConsole(string commandText)
 Remove specified command from all console, if exist
 
 ```c#
-void ExecuteCommandToAllConsole(Action<[IConsoleWriter](#IConsoleWriter)> action)
+void ExecuteCommandToAllConsole(Action<IConsoleWriter> action)
 ```
 Execute an action to all consoles, with [IConsoleWriter](#IConsoleWriter) parameter to write in selected console
 
