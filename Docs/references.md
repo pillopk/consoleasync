@@ -168,8 +168,103 @@ Stop all worker and destroy current console.
 
 
 ------------------------------------------------------------------------
-##IConsoleWriter
-blah blah blah blah blah blah blah blah
+IConsoleWriter
+This interface manage the output of the console instance, all the output methods return same IConsoleWriter object to permit fluent syntax like:
+```c#
+Writer.Text("Hey ").Info("John Doe").Text(" you are welcome !").NewLine();
+```
+
+####Properties
+
+#####IConsoleWriter.ConsoleName
+```c#
+string ConsoleName { get; }
+```
+Return the name of the parent console
+
+####Output Methods
+
+#####IConsoleWriter.Info
+```c#
+IConsoleWriter Info(string text)
+IConsoleWriter Info(string format, params object[] parameters)
+```
+Write content of text parameter with information style, methos support also [String.Format](https://msdn.microsoft.com/it-it/library/b1csw23d(v=vs.110).aspx) parameters
+
+#####IConsoleWriter.Warning
+```c#
+IConsoleWriter Warning(string text)
+IConsoleWriter Warning(string format, params object[] parameters)
+```
+Write content of text parameter with warning style, methos support also [String.Format](https://msdn.microsoft.com/it-it/library/b1csw23d(v=vs.110).aspx) parameters
+
+#####IConsoleWriter.Error
+```c#
+IConsoleWriter Error(string text)
+IConsoleWriter Error(string format, params object[] parameters)
+```
+Write content of text parameter with error style, methos support also [String.Format](https://msdn.microsoft.com/it-it/library/b1csw23d(v=vs.110).aspx) parameters
+
+#####IConsoleWriter.Muted
+```c#
+IConsoleWriter Muted(string text)
+IConsoleWriter Muted(string format, params object[] parameters)
+```
+Write content of text parameter with muted style, methos support also [String.Format](https://msdn.microsoft.com/it-it/library/b1csw23d(v=vs.110).aspx) parameters
+
+#####IConsoleWriter.Text
+```c#
+IConsoleWriter Text(string text)
+IConsoleWriter Text(string format, params object[] parameters)
+```
+Write content of text parameter with default style, methos support also [String.Format](https://msdn.microsoft.com/it-it/library/b1csw23d(v=vs.110).aspx) parameters
+
+#####IConsoleWriter.ClearCurrentLine
+```c#
+IConsoleWriter ClearCurrentLine()
+```
+Clear the current line of output and back the cursor on the first character
+
+#####IConsoleWriter.Clear
+```c#
+IConsoleWriter Clear()
+```
+Clear all output of the console instance
+
+#####IConsoleWriter.NewLine
+```c#
+IConsoleWriter NewLine()
+```
+Terminate current output line and create a new one
+
+####Other Methods
+
+#####IConsoleWriter.CancelSaveOutputToFile
+```c#
+void CancelSaveOutputToFile()
+```
+Stop the save to file operation
+
+#####IConsoleWriter.SaveOutputToFile
+```c#
+void SaveOutputToFile(string directory, string name)
+void SaveOutputToFile(string directory, string name, int linesPerFile, int linesPerFlush)
+```
+Save the output of the current console to multiple files, every file will have the linesPerFile parameter of line each and raise a flush every linesPerFlush parameter line.
+The generated path is *(directory parameter)/(name parameter)-(formatted date)-(counter).txt*
+If linesPerFile and linesPerFlush are omitted the default values is 1000 line per file and 50 line per flush
+
+#####IConsoleWriter.ScrollTop
+```c#
+void ScrollTop()
+```
+Scroll the current view to the top
+
+#####IConsoleWriter.ScrollBottom
+```c#
+void ScrollBottom()
+```
+Scroll the current view to the bottom
 
 
 ------------------------------------------------------------------------
