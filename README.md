@@ -11,14 +11,14 @@ Extension class with some utility method
 >Return the first characters of a string specified by length parameter
 
 	string LeftRest(int length)
->Return the last characters of a string without the first characters specified by length parameter, inverse of Left function
+Return the last characters of a string without the first characters specified by length parameter, inverse of Left function
 
-	string Right(int length)
+`string Right(int length)`
 >Return the last characters of a string specified by length parameter
 
 
-	string RightRest(int length)
->Return the first characters of a string without the last characters specified by length parameter, inverse of Left function
+`string RightRest(int length)`
+Return the first characters of a string without the last characters specified by length parameter, inverse of Left function
 
 	string Chunk(int startIndex, int endIndex)
 >Return subset of string starting and ending from specified parameters
