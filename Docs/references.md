@@ -168,7 +168,7 @@ Stop all worker and destroy current console.
 
 
 ------------------------------------------------------------------------
-IConsoleWriter
+##IConsoleWriter
 This interface manage the output of the console instance, all the output methods return same IConsoleWriter object to permit fluent syntax like:
 ```c#
 Writer.Text("Hey ").Info("John Doe").Text(" you are welcome !").NewLine();
