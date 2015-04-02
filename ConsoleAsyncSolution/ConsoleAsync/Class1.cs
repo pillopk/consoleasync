@@ -8,5 +8,6 @@ namespace ConsoleAsync
 {
     public class Class1
     {
+
     }
 }
