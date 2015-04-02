@@ -19,11 +19,13 @@ and helper method to make operation to all existing consoles
 
 ####Properties
 
+#####AvailableInputChars
 ```c#
 string AvailableInputChars { get; set; }
 ```
 This property contain a string with all allowed char for input, all char not in this string will be ignored
  
+ #####ActiveConsole
 ```c#
 IConsole ActiveConsole { get; }
 ```
@@ -31,21 +33,25 @@ This property return the actual visible console
 
 ####Methods
 
+#####CreateConsole
 ```c#
  IConsole CreateConsole(string consoleName)
 ```
 Create a new console with specified name and return [IConsole](#IConsole) interface
 
+#####DestroyConsole
 ```c#
 void DestroyConsole(string consoleName)
 ```
 Destroy console with specified name if the console is the last one this method throws an exception
 
+######ShowConsole
 ```c#
 void ShowConsole(string consoleName)
 ```
 Make console with specified name visible
 
+######EnumerateConsoles
 ```c#
 IEnumerable<IConsole> EnumerateConsoles()
 ```
