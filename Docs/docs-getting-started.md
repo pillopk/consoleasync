@@ -1,3 +1,5 @@
+[back to summary](summary.md)
+
 Getting Started
 ------------------------------------------------------------------------
 ```c#
@@ -76,3 +78,5 @@ console.AddCommand("print", (writer, strings) => strings.ToList().ForEach(s => w
 console.AddCommand("quit", (writer, strings) => ConsoleAsync.Quit());
 ConsoleAsync.Run();
 ```
+
+[back to summary](summary.md)
