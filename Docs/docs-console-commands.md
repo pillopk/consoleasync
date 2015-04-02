@@ -1,6 +1,6 @@
 [back to summary](summary.md)
 
-Console Commands
 ------------------------------------------------------------------------
+##Console Commands
 
-[back to summary](summary.md)
+[back to top](#console-commands) - [back to summary](summary.md)

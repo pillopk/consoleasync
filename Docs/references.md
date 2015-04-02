@@ -404,4 +404,4 @@ string ToFileSize()
 ```
 Return a string with the long value converted as file size (Eg. 10Bt / 10Mb / 10Gb)
 
-[back to summary](summary.md)
+[back to top](#References) - [back to summary](summary.md)

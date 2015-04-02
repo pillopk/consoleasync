@@ -79,4 +79,4 @@ console.AddCommand("quit", (writer, strings) => ConsoleAsync.Quit());
 ConsoleAsync.Run();
 ```
 
-[back to summary](summary.md)
+[back to top](#getting-started) - [back to summary](summary.md)
