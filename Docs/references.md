@@ -19,13 +19,13 @@ and helper method to make operation to all existing consoles
 
 ####Properties
 
-#####AvailableInputChars
+#####ConsoleAsync.AvailableInputChars
 ```c#
 string AvailableInputChars { get; set; }
 ```
 This property contain a string with all allowed char for input, all char not in this string will be ignored
  
-#####ActiveConsole
+#####ConsoleAsync.ActiveConsole
 ```c#
 IConsole ActiveConsole { get; }
 ```
@@ -33,61 +33,61 @@ This property return the actual visible console
 
 ####Methods
 
-#####CreateConsole
+#####ConsoleAsync.CreateConsole
 ```c#
  IConsole CreateConsole(string consoleName)
 ```
 Create a new console with specified name and return [IConsole](#IConsole) interface
 
-#####DestroyConsole
+#####ConsoleAsync.DestroyConsole
 ```c#
 void DestroyConsole(string consoleName)
 ```
 Destroy console with specified name if the console is the last one this method throws an exception
 
-#####ShowConsole
+#####ConsoleAsync.ShowConsole
 ```c#
 void ShowConsole(string consoleName)
 ```
 Make console with specified name visible
 
-#####EnumerateConsoles
+#####ConsoleAsync.EnumerateConsoles
 ```c#
 IEnumerable<IConsole> EnumerateConsoles()
 ```
 Return anumeration of existing [IConsole](#IConsole)
 
-#####AddCommandToAllConsole
+#####ConsoleAsync.AddCommandToAllConsole
 ```c#
 void AddCommandToAllConsole(string commandText, Action<IConsoleWriter, string[]> action)
 ```
 Add a command to all consoles, with text specified in commandText parameter. The associated action require an [IConsoleWriter](#IConsoleWriter) parameter to write in selected console and a string array that contain all the parameter passed to a command through input. If command already exist in one console the method throws an exception
 
-#####RemoveCommandFromAllConsole
+#####ConsoleAsync.RemoveCommandFromAllConsole
 ```c#
 void RemoveCommandFromAllConsole(string commandText)
 ```
 Remove specified command from all console, if exist
 
-#####ExecuteCommandToAllConsole
+#####ConsoleAsync.ExecuteCommandToAllConsole
 ```c#
 void ExecuteCommandToAllConsole(Action<IConsoleWriter> action)
 ```
 Execute an action to all consoles, with [IConsoleWriter](#IConsoleWriter) parameter to write in selected console
 
-#####CommandsReceived
+#####ConsoleAsync.CommandsReceived
 ```c#
 void CommandsReceived(Action<string, bool>; action)
 ```
 The specified action will be fired at every command sended, the string parameter is the command, the boolean parameters is true if this command was managed by a console
 
-#####Run
+#####ConsoleAsync.Run
 ```c#
 void Run()
 ```
 This method raise the ConsoleAsync cicle, and waiting for worker or console command, until Quit method was called
 
-#####Quit
+#####ConsoleAsync.Quit
 ```c#
 void Quit()
 ```
@@ -97,7 +97,74 @@ Stop and destroy every worker and console, then quit all ConsoleAsync functional
 
 ------------------------------------------------------------------------
 ##IConsole
-blah blah blah blah blah blah blah blah
+This interface manage the single console instance
+
+####Properties
+
+#####IConsole.Name
+```c#
+string Name { get; }
+```
+The name of the console
+
+####Methods
+
+#####IConsole.GetWriter
+```c#
+IConsoleWriter GetWriter();
+```
+Return the writer interface to access the console output
+
+#####IConsole.AddCommand
+```c#
+void AddCommand(string commandText, Action<IConsoleWriter, string[]> action)
+```
+Add a command to console, with text specified in commandText parameter. The associated action require an [IConsoleWriter](#IConsoleWriter)
+parameter to write in selected console and a string array that contain all the parameter passed to a command through input
+ 
+*If command already exist in console the method throws an exception*
+
+#####IConsole.RemoveCommand
+```c#
+void RemoveCommand(string commandText action)
+```
+Remove command with specified name from console
+
+#####IConsole.AddKeyCommand
+```c#
+void AddKeyCommand(KeyCommandEnum key, string command)
+void AddKeyCommand(KeyCommandEnum key, string command, bool autoSend)
+```
+Associate a string command to a specified function key (F1...F10), when the key is pressed the command is issued
+ 
+*If autoSend is false, when user press relative key, the command will only writed in input line*
+
+#####IConsole.ClearKeyCommand
+```c#
+void ClearKeyCommand(KeyCommandEnum key)
+```
+Remove association of specified function key
+
+#####IConsole.ClearKeyCommand
+```c#
+void Execute(Action<IConsoleWriter, string[]> action)
+```
+Immediately execute action command in actual console with the relative writer as parameter
+
+#####IConsole.AddWorker
+```c#
+IConsoleWorker AddWorker(ConsoleWorker consoleWorker)
+```
+Add worker to execution queue of this console, and return an interface with management helper method
+
+#####IConsole.AddWorker
+```c#
+void Destroy()
+```
+Stop all worker and destroy current console.
+ 
+**if the console is the last one this method throws an exception**
+
 
 
 ------------------------------------------------------------------------
