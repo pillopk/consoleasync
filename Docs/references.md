@@ -1,10 +1,21 @@
-ConsoleAsync
-------------
+References
+------------------------------------------------------------------------
+
+* [ConsoleAsync](#consoleasync)
+* [IConsole](#iconsole)
+* [IConsoleWriter](#iconsolewriter)
+* [IConsoleWorker](#iconsoleworker)
+* [ConsoleWorker](#consoleworker)
+* [Extensions](#extensions)
+
+
+
+------------------------------------------------------------------------
+##ConsoleAsync
 ConsoleAsync is a static class needed for create/destroy console, for worker management cicle 
 and helper method to make operation to all existing consoles
 
-
-###Properties
+####Properties
 
 ```c#
 string AvailableInputChars { get; set; }
@@ -16,8 +27,7 @@ IConsole ActiveConsole { get; }
 ```
 This property return the actual visible console
 
-
-###Methods
+####Methods
 
 ```c#
  IConsole CreateConsole(string consoleName)
@@ -71,27 +81,71 @@ Stop and destroy every worker and console, then quit all ConsoleAsync functional
 
 
 
-IConsole
-------------
+------------------------------------------------------------------------
+##IConsole
 blah blah blah blah blah blah blah blah
 
 
-IConsoleWriter
-------------
+------------------------------------------------------------------------
+##IConsoleWriter
 blah blah blah blah blah blah blah blah
 
 
-IConsoleWorker
-------------
+------------------------------------------------------------------------
+##IConsoleWorker
 blah blah blah blah blah blah blah blah
 
 
-ConsoleWorker
-------------
+------------------------------------------------------------------------
+##ConsoleWorker
 blah blah blah blah blah blah blah blah
 
 
-Extensions
-------------
-blah blah blah blah blah blah blah blah
+
+##Extensions
+Extension class with some utility method
+
+####String Methods
+
+```c#
+string Left(int length)
+```Return the first characters of a string specified by length parameter
+
+```c#
+string LeftRest(int length)
+```Return the last characters of a string without the first characters specified by length parameter, inverse of Left function
+
+```c#
+string Right(int length)
+```Return the last characters of a string specified by length parameter
+
+```c#
+string RightRest(int length)
+```Return the first characters of a string without the last characters specified by length parameter, inverse of Left function
+
+```c#
+string Chunk(int startIndex, int endIndex)
+```Return subset of string starting and ending from specified parameters
+
+```c#
+string Fit(int totalLength, char filler = ' ')
+```Return a string with length specified by totalLength parameter, eventually filled or truncated
+
+```c#
+string Truncate(int totalLength, string ellipsis = "_")
+```Truncate string at the specified length and insert ellipsis character only if the string length is greater than the specified total length
+
+```c#
+string RemoveChar(int charIndex)
+```Return string without a specified character
+
+```c#
+string FitMultiline(int lineLength)
+```Cut source string in multiple lines with a length specified by lineLength parameter
+
+####Long Methods
+
+```c#
+string ToFileSize()
+```Return a string with the long value converted as file size (Eg. 10Bt / 10Mb / 10Gb)
 

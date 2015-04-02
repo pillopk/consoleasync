@@ -9,9 +9,18 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample", "Sample\Sample.csp
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{07A9943E-8311-4440-B3A4-17DEE136206F}"
 	ProjectSection(SolutionItems) = preProject
+		..\Docs\builtin.md = ..\Docs\builtin.md
+		..\Docs\docs-asyncronous-worker.md = ..\Docs\docs-asyncronous-worker.md
+		..\Docs\docs-console-commands.md = ..\Docs\docs-console-commands.md
+		..\Docs\docs-console-management.md = ..\Docs\docs-console-management.md
+		..\Docs\docs-getting-started.md = ..\Docs\docs-getting-started.md
+		..\Docs\references.md = ..\Docs\references.md
+		..\Docs\summary.md = ..\Docs\summary.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{022D91DA-1936-413C-A9FD-09D378AC8ABA}"
+	ProjectSection(SolutionItems) = preProject
 		..\README.md = ..\README.md
-		..\README.temp.md = ..\README.temp.md
-		..\References.md = ..\References.md
 	EndProjectSection
 EndProject
 Global
