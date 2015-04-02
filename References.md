@@ -69,3 +69,29 @@ void Quit()
 ```
 Stop and destroy every worker and console, then quit all ConsoleAsync functionality
 
+
+
+IConsole
+------------
+blah blah blah blah blah blah blah blah
+
+
+IConsoleWriter
+------------
+blah blah blah blah blah blah blah blah
+
+
+IConsoleWorker
+------------
+blah blah blah blah blah blah blah blah
+
+
+ConsoleWorker
+------------
+blah blah blah blah blah blah blah blah
+
+
+Extensions
+------------
+blah blah blah blah blah blah blah blah
+

@@ -2,20 +2,18 @@ ConsoleAsync
 ========
 Restyling of standard C# console with commands creation, multiple consoles and support for asyncronous worker
 
-[Long Methods](#long-methods)
-
 * Documentation
 	* [Getting Started](#getting-started)
 	* [Console Management](#console-management)
 	* [Console Commands](#console-commands)
 	* [Asyncronous Worker](#asyncronous-worker)
 * References
-	* [ConsoleAsync](#consoleasync)
-	* [IConsole](#iconsole)
-	* [IConsoleWriter](#iconsolewriter)
-	* [IConsoleWorker](#iconsoleworker)
-	* [ConsoleWorker](#consoleworker)
-	* [Extensions](#extensions)
+	* [ConsoleAsync](References.md#consoleasync)
+	* [IConsole](References.md#iconsole)
+	* [IConsoleWriter](References.md#iconsolewriter)
+	* [IConsoleWorker](References.md#iconsoleworker)
+	* [ConsoleWorker](References.md#consoleworker)
+	* [Extensions](References.md#extensions)
 * Builtin
 	* [TimedWorker](#timedworker)
 	* [FolderWatcherWorker](#folderwatcherworker)
