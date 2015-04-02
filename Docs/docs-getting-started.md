@@ -2,10 +2,12 @@ Getting Started
 ------------------------------------------------------------------------
 ```c#
 IConsole console = ConsoleAsync.CreateConsole("Getting Started");
+
 console.Execute(writer =>
 {
 	writer.Info("Getting started console").NewLine();
 });
+
 console.AddCommand("print", (writer, strings) =>
 {
 	foreach (string s in strings)
@@ -13,10 +15,12 @@ console.AddCommand("print", (writer, strings) =>
 		writer.Text(s).NewLine();
 	}
 });
+
 console.AddCommand("quit", (writer, strings) =>
 {
 	ConsoleAsync.Quit();
 });
+
 ConsoleAsync.Run();
 ```
 

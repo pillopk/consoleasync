@@ -3,7 +3,7 @@ ConsoleAsync
 Restyling of standard C# console with commands creation, multiple consoles and support for asyncronous worker
 
 * Documentation
-	* [Getting Started](docs-asyncronous-worker.md)
+	* [Getting Started](docs-getting-started.md)
 	* [Console Management](docs-console-management.md)
 	* [Console Commands](docs-console-commands.md)
 	* [Asyncronous Worker](docs-asyncronous-worker.md)
