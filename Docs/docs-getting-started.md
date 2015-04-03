@@ -35,15 +35,15 @@ If the command exist the relative action will be called with writer object and t
 ```c#
 IConsole console = ConsoleAsync.CreateConsole("Getting Started");
 ```
-Create a console called 'Getting Started' and return its control object, the first time ConsoleAsync.CreateConsole() be called entire ConsoleAsync rendering cicle will be initialized
-
+Create a console called 'Getting Started' and return its control object, first time ConsoleAsync.CreateConsole() is called entire ConsoleAsync rendering cicle will be initialized
+ 
 ```c#
 console.Execute(writer => {
 	writer.Info("Getting started console").NewLine();
 });
 ```
 This fragment execute an action immediately on the console object, in this case write a text in info style and create a new line
-
+ 
 ```c#
 console.AddCommand("print", (writer, strings) =>
 {
@@ -55,7 +55,7 @@ console.AddCommand("print", (writer, strings) =>
 ```
 This fragment add 'print' command to a console, when the command is issued all the parameters will be written on the console.
 Eg. command 'print one two three' will print 'one', 'two' and 'three' word in console
-
+ 
 ```c#
 console.AddCommand("quit", (writer, strings) =>
 {
@@ -63,14 +63,13 @@ console.AddCommand("quit", (writer, strings) =>
 });
 ```
 This fragment add 'quit' command to a console, when typed the ConsoleAsync.Quit() method is called entire ConsoleAsync object with all the console and worker is closed
-
+ 
 ```c#
 ConsoleAsync.Run();
 ```
 Execute the console cicle, the program execution is stopped on this method until ConsoleAsync.Quit() is called
-
 >Note that the same functionality will be achieved with expression syntax
-
+ 
 ```c#
 IConsole console = ConsoleAsync.CreateConsole("Getting Started");
 console.Execute(writer => writer.Info("Getting started console").NewLine());
@@ -78,5 +77,5 @@ console.AddCommand("print", (writer, strings) => strings.ToList().ForEach(s => w
 console.AddCommand("quit", (writer, strings) => ConsoleAsync.Quit());
 ConsoleAsync.Run();
 ```
-
+ 
 [back to top](#getting-started) - [back to summary](summary.md)

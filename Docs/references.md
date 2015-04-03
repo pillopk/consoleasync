@@ -127,8 +127,7 @@ void AddCommand(string commandText, Action<IConsoleWriter, string[]> action)
 ```
 Add a command to console, with text specified in commandText parameter. The associated action require an [IConsoleWriter](#IConsoleWriter)
 parameter to write in selected console and a string array that contain all the parameter passed to a command through input
- 
-*If command already exist in console the method throws an exception*
+>If command already exist in console the method throws an exception
 
 #####IConsole.RemoveCommand
 ```c#
@@ -142,8 +141,7 @@ void AddKeyCommand(KeyCommandEnum key, string command)
 void AddKeyCommand(KeyCommandEnum key, string command, bool autoSend)
 ```
 Associate a string command to a specified function key (F1...F10), when the key is pressed the command is issued
- 
-*If autoSend is false, when user press relative key, the command will only writed in input line*
+>If autoSend is false, when user press relative key, the command will only writed in input line
 
 #####IConsole.ClearKeyCommand
 ```c#
@@ -163,13 +161,18 @@ IConsoleWorker AddWorker(ConsoleWorker consoleWorker)
 ```
 Add worker to execution queue of this console, and return an interface with management helper method
 
-#####IConsole.AddWorker
+#####IConsole.RemoveWorker
+```c#
+IConsoleWorker RemoveWorker(ConsoleWorker consoleWorker)
+```
+Remove worker from execution queue of this console, then destroy
+
+#####IConsole.Destroy
 ```c#
 void Destroy()
 ```
-Stop all worker and destroy current console.
- 
-**if the console is the last one this method throws an exception**
+Stop all worker and destroy current console. 
+>if the console is the last one this method throws an exception
 
 
 
@@ -279,6 +282,12 @@ This interface manage the worker instance
 
 ####Properties
 
+#####IConsoleWorker.UniqueID
+```c#
+Guid UniqueID { get; }
+```
+Return guid that uniquely identify the worker
+
 #####IConsoleWorker.State
 ```c#
 WorkerStateEnum State { get; }
@@ -326,9 +335,10 @@ Abstract class for the creation of custom worker, all method and properties must
 
 #####ConsoleWorker.IntervalBetweenExecution
 ```c#
-TimeSpan IntervalBetweenExecution { get; }
+TimeSpan? IntervalBetweenExecution { get; }
 ```
 Value returned from this property is the interval between call of OnExecute method
+>If the value returned is null the worker dont create execution cicle, run manually with IConsoleWorker.Execute
 
 ####Methods
 
