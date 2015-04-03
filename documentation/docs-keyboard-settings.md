@@ -6,6 +6,8 @@ List of key functionality
 
 ###Input line keys
  
+|Key|Description|
+|---|-----------|
 |**Arrow Left/Right**|Move cursor to left/right over the command line|
 |**Arrow Left/Right with CTRL|Move cursor to left/right over the command line one word at time|
 |**Home/End**|Move the cursor to the start/end of the command line|
@@ -16,6 +18,8 @@ List of key functionality
  
 ###Viewport keys
  
+|Key|Description|
+|---|-----------|
 |TAB|Cicle through consoles|
 |**Arrow Up/Down**|Scroll viewport one line up/down|
 |**Arrow Up/Down with CTRL**|Scroll viewport one page up/down|
