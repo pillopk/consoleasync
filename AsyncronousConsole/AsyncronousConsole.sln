@@ -8,16 +8,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample", "Sample\Sample.csproj", "{2A6AE5D1-8BC0-4E82-8CF7-B7DF1CC5FA60}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{07A9943E-8311-4440-B3A4-17DEE136206F}"
-	ProjectSection(SolutionItems) = preProject
-		..\docs\builtin.md = ..\docs\builtin.md
-		..\docs\docs-asyncronous-worker.md = ..\docs\docs-asyncronous-worker.md
-		..\docs\docs-console-commands.md = ..\docs\docs-console-commands.md
-		..\docs\docs-console-management.md = ..\docs\docs-console-management.md
-		..\docs\docs-getting-started.md = ..\docs\docs-getting-started.md
-		..\docs\docs-keyboard-settings.md = ..\docs\docs-keyboard-settings.md
-		..\docs\references.md = ..\docs\references.md
-		..\docs\summary.md = ..\docs\summary.md
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{022D91DA-1936-413C-A9FD-09D378AC8ABA}"
 	ProjectSection(SolutionItems) = preProject
