@@ -19,6 +19,18 @@ and helper method to make operation to all existing consoles
 
 ####Properties
 
+#####ConsoleAsync.ConsoleWidth
+```c#
+int ConsoleWidth { get; }
+```
+Return the width of the console window in characters
+
+#####ConsoleAsync.ConsoleHeight
+```c#
+int ConsoleHeight { get; }
+```
+Return the height of the console window in characters
+
 #####ConsoleAsync.AvailableInputChars
 ```c#
 string AvailableInputChars { get; set; }
@@ -57,6 +69,14 @@ IEnumerable<IConsole> EnumerateConsoles()
 ```
 Return anumeration of existing [IConsole](#IConsole)
 
+#####ConsoleAsync.SetConsoleSize
+```c#
+ConsoleAsync.SetConsoleSize(int width, int height);
+```
+Set the size of console window, the values must be greather than 60x30 characters
+>Use of Console.WindowWidth and Console.WindowHeight directly, after ConsoleAsync initialization,
+>could generate unespected behaviour
+
 #####ConsoleAsync.AddCommandToAllConsole
 ```c#
 void AddCommandToAllConsole(string commandText, Action<IConsoleWriter, string[]> action)
@@ -74,6 +94,12 @@ Remove specified command from all console, if exist
 void ExecuteCommandToAllConsole(Action<IConsoleWriter> action)
 ```
 Execute an action to all consoles, with [IConsoleWriter](#IConsoleWriter) parameter to write in selected console
+
+#####ConsoleAsync.SendCommand
+```c#
+bool SendCommand(string consoleName, string commandText)
+```
+Send a command to a specific console, return true if console exist and command was found
 
 #####ConsoleAsync.CommandsReceived
 ```c#
@@ -135,6 +161,12 @@ void RemoveCommand(string commandText action)
 ```
 Remove command with specified name from console
 
+#####IConsole.SendCommand
+```c#
+bool SendCommand(string commandText);
+```
+Send a command to a console, return true if command was found
+
 #####IConsole.AddKeyCommand
 ```c#
 void AddKeyCommand(KeyCommandEnum key, string command)
@@ -167,6 +199,21 @@ IConsoleWorker RemoveWorker(ConsoleWorker consoleWorker)
 ```
 Remove worker from execution queue of this console, then destroy
 
+#####IConsole.CancelSaveOutputToFile
+```c#
+void CancelSaveOutputToFile()
+```
+Stop the save to file operation
+
+#####IConsole.SaveOutputToFile
+```c#
+void SaveOutputToFile(string directory, string name)
+void SaveOutputToFile(string directory, string name, int linesPerFile, int linesPerFlush)
+```
+Save the output of the current console to multiple files, every file will have the linesPerFile parameter of line each and raise a flush every linesPerFlush parameter line.
+The generated path is *(directory parameter)/(name parameter)-(formatted date)-(counter).txt*
+If linesPerFile and linesPerFlush are omitted the default values is 1000 line per file and 50 line per flush
+
 #####IConsole.Show
 ```c#
 void Show()
@@ -198,6 +245,7 @@ string ConsoleName { get; }
 Return the name of the parent console
 
 ####Output Methods
+>All write methods accepts also unescaped string like @""
 
 #####IConsoleWriter.Info
 ```c#
@@ -253,21 +301,6 @@ IConsoleWriter NewLine()
 Terminate current output line and create a new one
 
 ####Other Methods
-
-#####IConsoleWriter.CancelSaveOutputToFile
-```c#
-void CancelSaveOutputToFile()
-```
-Stop the save to file operation
-
-#####IConsoleWriter.SaveOutputToFile
-```c#
-void SaveOutputToFile(string directory, string name)
-void SaveOutputToFile(string directory, string name, int linesPerFile, int linesPerFlush)
-```
-Save the output of the current console to multiple files, every file will have the linesPerFile parameter of line each and raise a flush every linesPerFlush parameter line.
-The generated path is *(directory parameter)/(name parameter)-(formatted date)-(counter).txt*
-If linesPerFile and linesPerFlush are omitted the default values is 1000 line per file and 50 line per flush
 
 #####IConsoleWriter.ScrollTop
 ```c#

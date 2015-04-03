@@ -1,12 +1,11 @@
-ConsoleAsync
+ConsoleAsync Documentation
 ------------------------------------------------------------------------
-Restyling of standard C# console with commands creation, multiple consoles and support for asyncronous worker
-
 
 * Documentation
 	* [Getting Started](docs-getting-started.md)
 	* [Console Management](docs-console-management.md)
 	* [Console Commands](docs-console-commands.md)
+	* [Output to File](docs-console-filesoutput.md)
 	* [Asyncronous Worker](docs-asyncronous-worker.md)
 	* [Keyboard Settings](docs-keyboard-settings.md)
 * References
@@ -18,6 +17,12 @@ Restyling of standard C# console with commands creation, multiple consoles and s
 	* [Extensions](references.md#extensions)
 * Builtin Workers
 	* [TimedWorker](builtin.md#timedworker)
-	* [FolderWatcherWorker](builtin.md#folderwatcherworker)
-	* [ObjectWatcherWorker](builtin.md#objectwatcherworker)
+     
+
+
+
+##Developer Notes
+------------------------------------------------------------------------
+*ConsoleAsync is not suitable for high precision asyncrony, actual precision is +/- 50 millisecond between [OnExecute](references.md#consoleworkeronexecute) cicle
+*Console output is never clear automatically, for long output (like application log) plan to clear console over time, consider use of [output to file](docs-console-filesoutput.md) feature
 

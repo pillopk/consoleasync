@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AsyncronousConsole.Support;
@@ -10,7 +11,6 @@ namespace AsyncronousConsole.Engine
     {
         private bool hasUpdate;
 
-        private ConsoleWriterFile writerFile;
         private readonly KeyScroll keys;
 
         internal int OffsetRowIndex { get; private set; }
@@ -144,28 +144,37 @@ namespace AsyncronousConsole.Engine
 
         private void WriteInner(ConsoleColor color, string text)
         {
-            string line = string.Concat(Lines.Last.Line, text);
+            string[] lines = text.Replace("\r\n", "\u2666").Split("\u2666".ToCharArray());
 
-            if (line.Length > ConsoleAsync.Manager.Renderer.ViewWidth)
+            for (int index = 0; index < lines.Count(); index++)
             {
-                string[] newLines = line.FitMultiline(ConsoleAsync.Manager.Renderer.ViewWidth);
-                Lines.Last.Line = newLines[0];
+                string line = string.Concat(Lines.Last.Line, lines[index]);
 
-                for (int i = 1; i < newLines.Length; i++)
+                if (line.Length > ConsoleAsync.Manager.Renderer.ViewWidth)
                 {
-                    Lines.Add(string.Empty);
+                    string[] newLines = line.FitMultiline(ConsoleAsync.Manager.Renderer.ViewWidth);
+                    Lines.Last.Line = newLines[0];
+
+                    for (int i = 1; i < newLines.Length; i++)
+                    {
+                        Lines.Add(string.Empty);
+                        SetNextColor(color);
+                        Lines.Last.Line = newLines[i];
+                        UpdateScroll();
+                    }
+                }
+                else
+                {
                     SetNextColor(color);
-                    Lines.Last.Line = newLines[i];
-                    UpdateScroll();
+                    Lines.Last.Line = line;
+                }
+
+                OnWriterOutput(Lines.Last.Line);
+                if (index < lines.Count() - 1)
+                {
+                    NewLine();
                 }
             }
-            else
-            {
-                SetNextColor(color);
-                Lines.Last.Line = line;
-            }
-
-            OnWriterOutput(Lines.Last.Line);
             hasUpdate = true;
         }
 
@@ -196,26 +205,6 @@ namespace AsyncronousConsole.Engine
         {
             hasUpdate = false;
         }
-
-        public void SaveOutputToFile(string directory, string name)
-        {
-            writerFile = new ConsoleWriterFile(this, directory, name);
-        }
-
-        public void SaveOutputToFile(string directory, string name, int linesPerFile, int linesPerFlush)
-        {
-            writerFile = new ConsoleWriterFile(this, directory, name, linesPerFile, linesPerFlush);
-        }
-
-        public void CancelSaveOutputToFile()
-        {
-            if (writerFile == null)
-                throw new InvalidOperationException("SaveOutputToFile procedure is not started");
-
-            writerFile.Dispose();
-            writerFile = null;
-        }
-
 
         #region Key Methods
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using AsyncronousConsole.Engine;
 using AsyncronousConsole.Support;
 
@@ -22,7 +23,7 @@ namespace AsyncronousConsole
         /// </summary>
         /// <param name="commandText">Text of the command</param>
         /// <param name="action">Action to be executed</param>
-        void AddCommand(string commandText, Action<IConsoleWriter, string[]> action);
+        void AddCommand(string commandText, Action<IConsoleWriter, List<string>> action);
 
         /// <summary>
         /// Remove command from console
@@ -50,6 +51,12 @@ namespace AsyncronousConsole
         /// </summary>
         /// <param name="key">Function key enumeration</param>
         void ClearKeyCommand(KeyCommandEnum key);
+        /// <summary>
+        /// Execute a command line
+        /// </summary>
+        /// <param name="commandText">Text of the command</param>
+        /// <returns></returns>
+        bool SendCommand(string commandText);
 
         /// <summary>
         /// Immediately execute action in console
@@ -85,24 +92,6 @@ namespace AsyncronousConsole
         /// </summary>
         /// <param name="filter">Function to key filtering, if return true the key will be ignored from input</param>
         void AddKeyFilter(Func<IConsoleWriter, ConsoleKeyInfo, bool> filter);
-    }
-
-    public interface IConsoleWriter
-    {
-        /// <summary>
-        /// Return the name of the owner console
-        /// </summary>
-        string ConsoleName { get; }
-
-        /// <summary>
-        /// Scroll vievport to bottom line
-        /// </summary>
-        void ScrollBottom();
-
-        /// <summary>
-        /// Scroll vievport to top line
-        /// </summary>
-        void ScrollTop();
 
         /// <summary>
         /// Save the console output to file
@@ -124,6 +113,24 @@ namespace AsyncronousConsole
         /// Cancel the saving cicle from console
         /// </summary>
         void CancelSaveOutputToFile();
+    }
+
+    public interface IConsoleWriter
+    {
+        /// <summary>
+        /// Return the name of the owner console
+        /// </summary>
+        string ConsoleName { get; }
+
+        /// <summary>
+        /// Scroll vievport to bottom line
+        /// </summary>
+        void ScrollBottom();
+
+        /// <summary>
+        /// Scroll vievport to top line
+        /// </summary>
+        void ScrollTop();
 
         /// <summary>
         /// Write text with info style

@@ -12,19 +12,12 @@ namespace Sample
     {
         static void Main(string[] args)
         {
-            IConsole console1 = ConsoleAsync.CreateConsole("First Console");
-            IConsole console2 = ConsoleAsync.CreateConsole("Second Console");
-            IConsole console3 = ConsoleAsync.CreateConsole("Third Console");
-            IConsole console4 = ConsoleAsync.CreateConsole("Fourth Console");
+            IConsole test = ConsoleAsync.CreateConsole("TestConsole");
+            
+            ConsoleAsync.SendCommand("TestConsole", "print one two three");
+            test.SendCommand("print one two three");
 
-            ConsoleAsync.ExecuteCommandToAllConsole(writer =>
-            {
-                for (int i = 0; i < 50; i++)
-                {
-                    writer.Text("{0} {1:0000}", writer.ConsoleName, i).NewLine();
-                }
-            });
-
+            test.AddCommand("quit", (writer, strings) => ConsoleAsync.Quit());
 
             ConsoleAsync.Run();
         }

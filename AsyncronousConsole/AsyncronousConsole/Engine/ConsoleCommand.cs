@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace AsyncronousConsole.Engine
@@ -8,9 +9,9 @@ namespace AsyncronousConsole.Engine
         public string Text { get; private set; }
 
         private readonly IConsoleWriter writer;
-        private readonly Action<IConsoleWriter, string[]> action;
+        private readonly Action<IConsoleWriter, List<string>> action;
 
-        public ConsoleCommand(IConsoleWriter consoleWriter, string command, Action<IConsoleWriter, string[]> function)
+        public ConsoleCommand(IConsoleWriter consoleWriter, string command, Action<IConsoleWriter, List<string>> function)
         {
             writer = consoleWriter;
             Text = command;
@@ -23,7 +24,7 @@ namespace AsyncronousConsole.Engine
 
             if (String.Equals(items[0], Text, StringComparison.InvariantCultureIgnoreCase) == false) return false;
 
-            string[] parameters = items.Skip(1).Take(items.Length - 1).ToArray();
+            List<string> parameters = items.Skip(1).Take(items.Length - 1).ToList();
             action(writer, parameters);
             return true;
         }

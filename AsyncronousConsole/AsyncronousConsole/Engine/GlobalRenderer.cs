@@ -108,10 +108,12 @@ namespace AsyncronousConsole.Engine
 
         #endregion
 
-        public GlobalRenderer()
+        public GlobalRenderer(int width, int height)
         {
             inputCommandOffset = 0;
 
+            Console.WindowWidth = width;
+            Console.WindowHeight = height;
             Console.BackgroundColor = ConsoleColor.Black;
             Console.ForegroundColor = ConsoleColor.White;
             Console.CursorVisible = false;

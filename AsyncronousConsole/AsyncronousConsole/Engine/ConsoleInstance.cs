@@ -8,6 +8,7 @@ namespace AsyncronousConsole.Engine
     internal class ConsoleInstance : IConsole
     {
         private Func<IConsoleWriter, ConsoleKeyInfo, bool> keyFilter;
+        private ConsoleWriterFile writerFile;
 
         internal ConsoleWriter Writer { get; private set; }
         internal List<WorkerManager> Workers { get; private set; }
@@ -31,7 +32,7 @@ namespace AsyncronousConsole.Engine
             Writer = new ConsoleWriter(Name);
         }
 
-        public void AddCommand(string commandName, Action<IConsoleWriter, string[]> action)
+        public void AddCommand(string commandName, Action<IConsoleWriter, List<string>> action)
         {
             ConsoleCommand exist =
                 Commands.FirstOrDefault(
@@ -41,6 +42,11 @@ namespace AsyncronousConsole.Engine
                 throw new Exception(string.Format("Command with name '{0}' already exist", commandName));
 
             Commands.Add(new ConsoleCommand(Writer, commandName, action));
+        }
+
+        public bool SendCommand(string commandText)
+        {
+            return ConsoleAsync.Manager.ExecuteCommand(this, commandText);
         }
 
         public void RemoveCommand(string commandName)
@@ -110,6 +116,31 @@ namespace AsyncronousConsole.Engine
         internal bool ApplyKeyFilter(ConsoleKeyInfo key)
         {
             return keyFilter != null && keyFilter(Writer, key);
+        }
+
+        public void SaveOutputToFile(string directory, string name)
+        {
+            if (writerFile != null)
+                throw new InvalidOperationException("SaveOutputToFile procedure is already active");
+
+            writerFile = new ConsoleWriterFile(Writer, directory, name);
+        }
+
+        public void SaveOutputToFile(string directory, string name, int linesPerFile, int linesPerFlush)
+        {
+            if (writerFile != null)
+                throw new InvalidOperationException("SaveOutputToFile procedure is already active");
+
+            writerFile = new ConsoleWriterFile(Writer, directory, name, linesPerFile, linesPerFlush);
+        }
+
+        public void CancelSaveOutputToFile()
+        {
+            if (writerFile == null)
+                throw new InvalidOperationException("SaveOutputToFile procedure is not active");
+
+            writerFile.Dispose();
+            writerFile = null;
         }
     }
 

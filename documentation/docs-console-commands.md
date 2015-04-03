@@ -70,6 +70,18 @@ ConsoleAsync.RemoveCommandFromAllConsole("identify");
 This sample remove the command named 'identify' from all consoles (if exist)
  
 
+####Send commands
+ 
+ 
+```c#
+IConsole testConsole = ConsoleAsync.CreateConsole("TestConsole");
+
+bool managed1 = ConsoleAsync.SendCommand("TestConsole", "print one two three");  // Send command to a console by name
+bool managed2 = testConsole.SendCommand("print one two three");                  // Send command to a console by object
+```
+Send a command to a console, return true if command was found and executed
+ 
+
 ####Manage inputs
  
  

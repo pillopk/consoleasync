@@ -9,12 +9,12 @@ namespace AsyncronousConsole.Engine
 {
     internal class ConsoleManager
     {
+        private readonly GlobalInput input;
+
         private bool isRunning = true;
         private bool initializing = true;
         private string actualConsoleName = string.Empty;
         private Action<string, bool> commandReceivedAction;
-
-        private readonly GlobalInput input;
 
         internal GlobalRenderer Renderer { get; private set; }
         internal List<ConsoleInstance> Consoles { get; private set; }
@@ -28,7 +28,7 @@ namespace AsyncronousConsole.Engine
         {
             Consoles = new List<ConsoleInstance>();
 
-            Renderer = new GlobalRenderer();
+            Renderer = new GlobalRenderer(ConsoleAsync.ConsoleWidth, ConsoleAsync.ConsoleHeight);
 
             input = new GlobalInput(Renderer);
             input.CommandReceived += InputCommandReceived;
@@ -73,7 +73,9 @@ namespace AsyncronousConsole.Engine
             if (Consoles.Count < 2)
                 throw new InvalidOperationException("Cannot destroy last console. Use quit command instead");
 
-            CicleConsole(-1);
+            if (ActiveConsole.Name == console.Name)
+                CicleConsole(-1);
+
             Consoles.Remove(console);
 
             if (console.Workers.Count > 0)
@@ -96,16 +98,20 @@ namespace AsyncronousConsole.Engine
 
         private void InputCommandReceived(object sender, InputEventArgs e)
         {
-            bool managed = false;
-
-            foreach (ConsoleCommand command in ActiveConsole.Commands)
-            {
-                if (command.TryExecute(e.Command))
-                    managed = true;
-            }
+            bool managed = ExecuteCommand(ActiveConsole, e.Command);
 
             if (commandReceivedAction != null)
                 commandReceivedAction(e.Command, managed);
+        }
+
+        public bool ExecuteCommand(ConsoleInstance console, string commandText)
+        {
+            foreach (ConsoleCommand command in console.Commands)
+            {
+                if (command.TryExecute(commandText))
+                    return true;
+            }
+            return false;
         }
 
         private void InputCicleConsole(object sender, CicleConsoleEventArgs e)
@@ -169,7 +175,7 @@ namespace AsyncronousConsole.Engine
             if (console.Name == actualConsoleName) Renderer.Render(ActiveConsole);
         }
 
-        public void AddCommandToAll(string commandName, Action<IConsoleWriter, string[]> action)
+        public void AddCommandToAll(string commandName, Action<IConsoleWriter, List<string>> action)
         {
             foreach (ConsoleInstance console in Consoles)
             {

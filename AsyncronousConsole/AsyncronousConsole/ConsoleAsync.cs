@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using AsyncronousConsole.Engine;
 
 namespace AsyncronousConsole
@@ -10,6 +11,20 @@ namespace AsyncronousConsole
 
         private static string availableChars = @"abcdefghijklmnopqrstuvwxyz0123456789 ,.;:_@#+-*/!£$%&()[]{}?^/|\";
         private static ConsoleManager managerInstance;
+        private static int consoleWidth = 100;
+        private static int consoleHeight = 36;
+
+        public static int ConsoleWidth
+        {
+            get { return consoleWidth; }
+            private set { consoleWidth = value; }
+        }
+
+        public static int ConsoleHeight
+        {
+            get { return consoleHeight; }
+            private set { consoleHeight = value; }
+        }
 
         /// <summary>
         /// String with all accepted char for command line
@@ -32,6 +47,27 @@ namespace AsyncronousConsole
                     managerInstance = new ConsoleManager();
                 }
                 return managerInstance;
+            }
+        }
+
+        public static void SetConsoleSize(int width, int height)
+        {
+            if (width < 60)
+                throw new ArgumentException("Width must be greater than 59");
+
+            if (width < 30)
+                throw new ArgumentException("Height must be greater than 29");
+
+            if (Manager == null)
+            {
+                ConsoleWidth = width;
+                ConsoleHeight = height;
+            }
+            else
+            {
+                Console.WindowWidth = width;
+                Console.WindowHeight = height;
+                Manager.Renderer.ForceRender();
             }
         }
 
@@ -86,7 +122,7 @@ namespace AsyncronousConsole
         /// </summary>
         /// <param name="commandText">Text of the command</param>
         /// <param name="action">Action to be executed</param>
-        public static void AddCommandToAllConsole(string commandText, Action<IConsoleWriter, string[]> action)
+        public static void AddCommandToAllConsole(string commandText, Action<IConsoleWriter, List<string>> action)
         {
             Manager.AddCommandToAll(commandText, action);
         }
@@ -107,6 +143,13 @@ namespace AsyncronousConsole
         public static void ExecuteCommandToAllConsole(Action<IConsoleWriter> action)
         {
             Manager.ExecuteCommandToAll(action);
+        }
+
+        public static bool SendCommand(string consoleName, string commandText)
+        {
+            ConsoleInstance console = Manager.Consoles.FirstOrDefault(c => c.Name == consoleName);
+            if (console == null) return false;
+            return Manager.ExecuteCommand(console, commandText);
         }
 
         /// <summary>
