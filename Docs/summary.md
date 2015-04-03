@@ -7,6 +7,7 @@ Restyling of standard C# console with commands creation, multiple consoles and s
 	* [Console Management](docs-console-management.md)
 	* [Console Commands](docs-console-commands.md)
 	* [Asyncronous Worker](docs-asyncronous-worker.md)
+	* [Keyboard Settings](docs-keyboard-settings.md)
 * References
 	* [ConsoleAsync](references.md#consoleasync)
 	* [IConsole](references.md#iconsole)

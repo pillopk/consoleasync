@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AsyncronousConsole;
+using AsyncronousConsole.Support;
 
 namespace Sample
 {
@@ -25,7 +26,9 @@ namespace Sample
                 return false;
             });
 
-            console.AddCommand("quit", (writer, strings) => ConsoleAsync.Quit());
+            ConsoleAsync.RemoveCommandFromAllConsole("identify");
+
+            console.AddKeyCommand(KeyCommandEnum.F1, "first par1 par2", false);
 
             console.AddCommand("first", (writer, strings) =>
             {
@@ -33,7 +36,7 @@ namespace Sample
                     writer.Text(strings[0]).NewLine();
             });
 
-            
+
 
             ConsoleAsync.Run();
         }
