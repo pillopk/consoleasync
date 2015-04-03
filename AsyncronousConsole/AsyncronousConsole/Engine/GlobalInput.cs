@@ -75,6 +75,8 @@ namespace AsyncronousConsole.Engine
             while (Console.KeyAvailable)
             {
                 ConsoleKeyInfo input = Console.ReadKey(true);
+                var ignore = console.ApplyKeyFilter(input);
+                if (ignore) continue;
 
                 if (input.Key == ConsoleKey.Enter) // Send Command
                 {

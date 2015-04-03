@@ -74,6 +74,12 @@ namespace AsyncronousConsole
         /// Destroy the current console instance
         /// </summary>
         void Destroy();
+
+        /// <summary>
+        /// Add a function for key filtering
+        /// </summary>
+        /// <param name="filter">Function to key filtering, if return true the key will be ignored from input</param>
+        void AddKeyFilter(Func<IConsoleWriter, ConsoleKeyInfo, bool> filter);
     }
 
     public interface IConsoleWriter

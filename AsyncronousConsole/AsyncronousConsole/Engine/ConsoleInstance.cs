@@ -7,6 +7,7 @@ namespace AsyncronousConsole.Engine
 {
     internal class ConsoleInstance : IConsole
     {
+        private Func<IConsoleWriter, ConsoleKeyInfo, bool> keyFilter;
 
         internal ConsoleWriter Writer { get; private set; }
         internal List<WorkerManager> Workers { get; private set; }
@@ -93,6 +94,17 @@ namespace AsyncronousConsole.Engine
         public void Destroy()
         {
             ConsoleAsync.Manager.DestroyConsole(this);
+        }
+
+
+        public void AddKeyFilter(Func<IConsoleWriter, ConsoleKeyInfo, bool> filter)
+        {
+            keyFilter = filter;
+        }
+
+        internal bool ApplyKeyFilter(ConsoleKeyInfo key)
+        {
+            return keyFilter != null && keyFilter(Writer, key);
         }
     }
 

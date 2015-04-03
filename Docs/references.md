@@ -115,6 +115,12 @@ IConsoleWriter GetWriter();
 ```
 Return the writer interface to access the console output
 
+#####IConsole.AddKeyFilter
+```c#
+void AddKeyFilter(Func<IConsoleWriter, ConsoleKeyInfo, bool> filter)
+```
+Add a filter to input, if the passed function return true the key will be ignored
+
 #####IConsole.AddCommand
 ```c#
 void AddCommand(string commandText, Action<IConsoleWriter, string[]> action)
