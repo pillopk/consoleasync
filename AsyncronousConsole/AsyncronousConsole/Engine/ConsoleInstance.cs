@@ -142,6 +142,16 @@ namespace AsyncronousConsole.Engine
             writerFile.Dispose();
             writerFile = null;
         }
+
+        public void WriteStandardOutput()
+        {
+            ConsoleAsync.Manager.ConsoleToStandardOutput = Name;
+        }
+
+        public void DiscardStandardOutput()
+        {
+            ConsoleAsync.Manager.ConsoleToStandardOutput = null;
+        }
     }
 
 }

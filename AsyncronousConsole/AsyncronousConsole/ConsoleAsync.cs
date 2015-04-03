@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Text;
 using AsyncronousConsole.Engine;
 
 namespace AsyncronousConsole
@@ -9,7 +11,7 @@ namespace AsyncronousConsole
     {
         internal const string SYSTEM_CONSOLE_TITLE = "Asyncronous Console v1.0";
 
-        private static string availableChars = @"abcdefghijklmnopqrstuvwxyz0123456789 ,.;:_@#+-*/!£$%&()[]{}?^/|\";
+        private static string availableChars = @"abcdefghijklmnopqrstuvwxyz0123456789 ,.;:_@#+-*/!£$%&()[]{}?^/|\'<>";
         private static ConsoleManager managerInstance;
         private static int consoleWidth = 100;
         private static int consoleHeight = 36;
@@ -26,9 +28,6 @@ namespace AsyncronousConsole
             private set { consoleHeight = value; }
         }
 
-        /// <summary>
-        /// String with all accepted char for command line
-        /// </summary>
         public static string AvailableInputChars
         {
             get { return availableChars; }
@@ -147,7 +146,7 @@ namespace AsyncronousConsole
 
         public static bool SendCommand(string consoleName, string commandText)
         {
-            ConsoleInstance console = Manager.Consoles.FirstOrDefault(c => c.Name == consoleName);
+            ConsoleInstance console = Manager.GetConsole(consoleName, false);
             if (console == null) return false;
             return Manager.ExecuteCommand(console, commandText);
         }

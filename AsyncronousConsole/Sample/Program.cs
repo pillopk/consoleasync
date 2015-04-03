@@ -1,25 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AsyncronousConsole;
+using AsyncronousConsole.BuiltIn;
 using AsyncronousConsole.Support;
 
 namespace Sample
 {
     class Program
     {
+
         static void Main(string[] args)
         {
-            IConsole test = ConsoleAsync.CreateConsole("TestConsole");
-            
-            ConsoleAsync.SendCommand("TestConsole", "print one two three");
-            test.SendCommand("print one two three");
 
-            test.AddCommand("quit", (writer, strings) => ConsoleAsync.Quit());
+            IConsole console = ConsoleAsync.CreateConsole("TestConsole");
 
-            ConsoleAsync.Run();
+            console.AddCommand("quit", (writer, strings) => ConsoleAsync.Quit());
+            console.AddCommand("start", (writer, strings) => console.WriteStandardOutput());
+            console.AddCommand("stop", (writer, strings) => console.DiscardStandardOutput());
+
+            console.AddWorker(new TimedWorker(TimeSpan.FromMilliseconds(500), (writer, span) => Console.WriteLine("{0}", span)));
+
+            ConsoleAsync.Run(true);
         }
     }
 }

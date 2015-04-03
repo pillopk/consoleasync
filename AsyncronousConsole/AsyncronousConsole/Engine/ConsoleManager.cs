@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using AsyncronousConsole.Support;
 
@@ -13,27 +15,40 @@ namespace AsyncronousConsole.Engine
 
         private bool isRunning = true;
         private bool initializing = true;
-        private string actualConsoleName = string.Empty;
+        private string actualConsoleName = null;
         private Action<string, bool> commandReceivedAction;
+        private readonly StringBuilder consoleStandardOutput;
 
+
+        internal string ConsoleToStandardOutput { get; set; }
         internal GlobalRenderer Renderer { get; private set; }
         internal List<ConsoleInstance> Consoles { get; private set; }
 
+        internal ConsoleInstance GetConsole(string consoleName, bool withException = true)
+        {
+            ConsoleInstance console = Consoles.FirstOrDefault(c => c.Name == consoleName);
+            if ((console == null) && withException) throw new InvalidOperationException(string.Format("Console '{0}' not found!", consoleName));
+            return console;
+        }
+
         internal ConsoleInstance ActiveConsole
         {
-            get { return Consoles.First(c => c.Name == actualConsoleName); }
+            get { return GetConsole(actualConsoleName); }
         }
 
         public ConsoleManager()
         {
+            ConsoleToStandardOutput = null;
             Consoles = new List<ConsoleInstance>();
-
             Renderer = new GlobalRenderer(ConsoleAsync.ConsoleWidth, ConsoleAsync.ConsoleHeight);
 
             input = new GlobalInput(Renderer);
             input.CommandReceived += InputCommandReceived;
             input.CicleConsole += InputCicleConsole;
             input.EscapePressed += InputEscapePressed;
+
+            consoleStandardOutput = new StringBuilder();
+            Console.SetOut(new StringWriter(consoleStandardOutput));
         }
 
         private void InputEscapePressed(object sender, EventArgs e)
@@ -64,7 +79,7 @@ namespace AsyncronousConsole.Engine
 
         public void DestroyConsole(string consoleName)
         {
-            ConsoleInstance console = Consoles.FirstOrDefault(c => c.Name == consoleName);
+            ConsoleInstance console = GetConsole(consoleName, false);
             if (console != null) DestroyConsole(console);
         }
 
@@ -144,14 +159,14 @@ namespace AsyncronousConsole.Engine
 
         public void ShowConsole(string consoleName)
         {
-            ConsoleInstance console = Consoles.FirstOrDefault(c => c.Name == consoleName);
-            if (console == null) throw new InvalidOperationException(string.Format("Console '{0}' not found!", consoleName));
-
-            actualConsoleName = consoleName;
+            ConsoleInstance console = GetConsole(consoleName);
+            actualConsoleName = console.Name;
         }
 
         public void Run(bool startAllWorker = false)
         {
+            consoleStandardOutput.Clear();
+
             Stopwatch watch = new Stopwatch();
             watch.Start();
 
@@ -160,13 +175,31 @@ namespace AsyncronousConsole.Engine
                 Consoles.ForEach(c => c.Workers.ForEach(w => w.Start()));
             }
 
+            if (Consoles.Count==0)
+                throw new InvalidOperationException("Cannot run ConsoleAsync without at least one console");
+            
             while (isRunning)
             {
                 input.Execute(ActiveConsole, watch.ElapsedMilliseconds);
                 Renderer.Render(ActiveConsole);
                 watch.Restart();
-                Task.Delay(20).Wait();
+                ManageStandardOutput();
+                Task.Delay(10).Wait();
             }
+        }
+
+        private void ManageStandardOutput()
+        {
+            string update = consoleStandardOutput.ToString();
+            consoleStandardOutput.Clear();
+
+            if (ConsoleToStandardOutput == null) return;
+
+            ConsoleInstance console = GetConsole(ConsoleToStandardOutput, false);
+            if (console == null) return;
+
+            if (string.IsNullOrEmpty(update) == false)
+                console.GetWriter().Text(update);
         }
 
         public void Execute(ConsoleInstance console, Action<IConsoleWriter> action)

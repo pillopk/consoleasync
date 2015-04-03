@@ -125,7 +125,7 @@ namespace AsyncronousConsole.Engine
 
         private void UpdateConsoleData()
         {
-            if ((lastWidth != Console.WindowWidth) && (lastHeight != Console.WindowHeight))
+            if ((lastWidth != Console.WindowWidth) || (lastHeight != Console.WindowHeight))
             {
                 ScreenWidth = Console.WindowWidth;
                 ScreenHeight = Console.WindowHeight;

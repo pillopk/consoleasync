@@ -113,6 +113,16 @@ namespace AsyncronousConsole
         /// Cancel the saving cicle from console
         /// </summary>
         void CancelSaveOutputToFile();
+
+        /// <summary>
+        /// Redirect the console standard output to this console
+        /// </summary>
+        void WriteStandardOutput();
+
+        /// <summary>
+        /// Ignore the console standard output
+        /// </summary>
+        void DiscardStandardOutput();
     }
 
     public interface IConsoleWriter

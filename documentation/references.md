@@ -214,6 +214,18 @@ Save the output of the current console to multiple files, every file will have t
 The generated path is *(directory parameter)/(name parameter)-(formatted date)-(counter).txt*
 If linesPerFile and linesPerFlush are omitted the default values is 1000 line per file and 50 line per flush
 
+#####IConsole.WriteStandardOutput
+```c#
+void WriteStandardOutput()
+```
+The standard output of the console (like Console.WriteLine()) will be writed to this console
+
+#####IConsole.DiscardStandardOutput
+```c#
+void DiscardStandardOutput()
+```
+The standard output of the console (like Console.WriteLine()) will be discarded
+
 #####IConsole.Show
 ```c#
 void Show()
