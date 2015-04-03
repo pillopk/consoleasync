@@ -10,9 +10,10 @@ with this object console can be created or destroyed
 ```c#
 IConsole console1 = ConsoleAsync.CreateConsole("First Console");
 IConsole console2 = ConsoleAsync.CreateConsole("Second Console");
+IConsole console3 = ConsoleAsync.CreateConsole("Third Console");
 ```
 With these commands three different consoles will be created, with TAB key consoles is cicled in the viewport.
-[ConsoleAsync.ActiveConsole](references.md#consoleasync.activeconsole) return the [IConsole](references.md#iconsole) of the actual visible console.
+[ConsoleAsync.ActiveConsole](references.md#consoleasyncactiveconsole) return the [IConsole](references.md#iconsole) of the actual visible console.
 >In the bottom/left corner of console window is present a string that indicate wath console is visible over the total
  
 
