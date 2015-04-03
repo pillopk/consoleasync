@@ -12,30 +12,18 @@ namespace Sample
     {
         static void Main(string[] args)
         {
-            IConsole console = ConsoleAsync.CreateConsole("First Console");
+            IConsole console1 = ConsoleAsync.CreateConsole("First Console");
+            IConsole console2 = ConsoleAsync.CreateConsole("Second Console");
+            IConsole console3 = ConsoleAsync.CreateConsole("Third Console");
+            IConsole console4 = ConsoleAsync.CreateConsole("Fourth Console");
 
-            console.Execute(writer => writer.NewLine().Info(writer.ConsoleName).NewLine());
-
-            console.AddKeyFilter((writer, info) =>
+            ConsoleAsync.ExecuteCommandToAllConsole(writer =>
             {
-                if ("0123456789".Contains(info.KeyChar))
+                for (int i = 0; i < 50; i++)
                 {
-                    writer.Warning("Pressed number {0}", info.KeyChar).NewLine();
-                    return true;
+                    writer.Text("{0} {1:0000}", writer.ConsoleName, i).NewLine();
                 }
-                return false;
             });
-
-            ConsoleAsync.RemoveCommandFromAllConsole("identify");
-
-            console.AddKeyCommand(KeyCommandEnum.F1, "first par1 par2", false);
-
-            console.AddCommand("first", (writer, strings) =>
-            {
-                if (strings.Length > 0)
-                    writer.Text(strings[0]).NewLine();
-            });
-
 
 
             ConsoleAsync.Run();

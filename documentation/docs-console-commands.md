@@ -84,7 +84,7 @@ ConsoleAsync.CommandsReceived((command, managed) =>
 All commands, existing or not in the console, call the method ConsoleAsync.CommandsReceived with a Boolean parameter 
 that identifies whether the command was executed in any console
 This sample demonstrate how intercept all unknow command and send a message to a utility console
->Note that every console object can retrieve its own writer through [IConsole..GetWriter](references.md#iconsole.getwriter) method
+>Note that every console object can retrieve its own writer through [IConsole.GetWriter](references.md#iconsolegetwriter) method
 
 
 
