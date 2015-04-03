@@ -3,8 +3,6 @@
 ##Keyboard Settings
 ------------------------------------------------------------------------
 List of key functionality
-
-####Input line keys
  
 ####Viewport keys
  
@@ -17,6 +15,8 @@ List of key functionality
  
 
 
+
+####Input line keys
  
 |Key|Description|
 |---|-----------|
