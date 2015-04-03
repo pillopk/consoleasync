@@ -11,7 +11,7 @@
 |---|-----------|
 |**TAB**|Cicle through consoles|
 |**Arrow Up/Down**|Scroll viewport one line up/down|
-|**CTRL** + **Arrow Up/Down**|Scroll viewport one page up/down|
+|**Pageup/PageDown***|Scroll viewport one page up/down|
 |**CTRL** + **Home/End**|Scroll viewport to the top/end of the viewport output|
  
  
