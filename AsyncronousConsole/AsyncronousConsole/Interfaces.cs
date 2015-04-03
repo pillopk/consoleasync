@@ -71,6 +71,11 @@ namespace AsyncronousConsole
         void RemoveWorker(IConsoleWorker existingWorker);
 
         /// <summary>
+        /// Make visible the console on viewport
+        /// </summary>
+        void Show();
+
+        /// <summary>
         /// Destroy the current console instance
         /// </summary>
         void Destroy();

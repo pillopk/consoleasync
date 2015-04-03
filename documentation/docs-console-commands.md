@@ -3,7 +3,7 @@
 ##Console Commands
 ------------------------------------------------------------------------
 
-When a console is create a new instance of [IConsole](references.md#IConsole) will be returned
+When a console is create a new instance of [IConsole](references.md#iconsole) will be returned
 ```c#
 IConsole console = ConsoleAsync.CreateConsole("First Console");
 ```
@@ -34,13 +34,16 @@ This sample remove previously created command , in this case the command 'print'
 console.AddKeyCommand(KeyCommandEnum.F1, "print");
 ```
 In this case a command line is linked to key F1, when this key is pressed the command was launched
+ 
 
 ```c#
 console.AddKeyCommand(KeyCommandEnum.F1, "first par1 par2", false);
 ```
 In this case a command line is linked to key F1, when this key is pressed the command was launched.
 When autoSend parameter is false the command is not executed, instead is write in the user input line
-
+>The specified command does not necessarily contain only the command, can also contain parameters
+ 
+ 
 ```c#
 console.ClearKeyCommand(KeyCommandEnum.F1);
 ```
@@ -49,7 +52,7 @@ In this case the key F1 is cleared, no more command line is bound
 
 
 ####Managing commands in all consoles
-The main object [ConsoleAsync](references.md#ConsoleAsync) contain utility method for manage command in all consoles
+The main object [ConsoleAsync](references.md#consoleasync) contain utility method for manage command in all consoles
  
  
 ```c#
@@ -65,6 +68,24 @@ This sample add a command named 'identify' to all consoles, when issued the cons
 ConsoleAsync.RemoveCommandFromAllConsole("identify");
 ```
 This sample remove the command named 'identify' from all consoles (if exist)
+ 
+
+####Manage inputs
+ 
+ 
+```c#
+IConsole fallbackConsole = ConsoleAsync.CreateConsole("Fallback Console");
+ConsoleAsync.CommandsReceived((command, managed) =>
+{
+    if (!managed)
+        fallbackConsole.GetWriter().Info("Unknow command '{0}'", command).NewLine();
+});
+```
+All commands, existing or not in the console, call the method ConsoleAsync.CommandsReceived with a Boolean parameter 
+that identifies whether the command was executed in any console
+This sample demonstrate how intercept all unknow command and send a message to a utility console
+>Note that every console object can retrieve its own writer through [IConsole..GetWriter](references.md#iconsole.getwriter) method
+
 
 
 [back to top](#console-commands) - [back to summary](summary.md)

@@ -91,6 +91,11 @@ namespace AsyncronousConsole.Engine
             ConsoleAsync.Manager.Execute(this, action);
         }
 
+        public void Show()
+        {
+            ConsoleAsync.ShowConsole(Name);
+        }
+
         public void Destroy()
         {
             ConsoleAsync.Manager.DestroyConsole(this);

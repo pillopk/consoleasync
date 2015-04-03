@@ -167,6 +167,12 @@ IConsoleWorker RemoveWorker(ConsoleWorker consoleWorker)
 ```
 Remove worker from execution queue of this console, then destroy
 
+#####IConsole.Show
+```c#
+void Show()
+```
+Make console visible on viewport
+
 #####IConsole.Destroy
 ```c#
 void Destroy()
