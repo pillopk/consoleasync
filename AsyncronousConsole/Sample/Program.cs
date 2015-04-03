@@ -27,6 +27,14 @@ namespace Sample
 
             console.AddCommand("quit", (writer, strings) => ConsoleAsync.Quit());
 
+            console.AddCommand("first", (writer, strings) =>
+            {
+                if (strings.Length > 0)
+                    writer.Text(strings[0]).NewLine();
+            });
+
+            
+
             ConsoleAsync.Run();
         }
     }
