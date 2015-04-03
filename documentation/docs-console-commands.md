@@ -74,10 +74,10 @@ This sample remove the command named 'identify' from all consoles (if exist)
  
  
 ```c#
-IConsole testConsole = ConsoleAsync.CreateConsole("TestConsole");
+IConsole console = ConsoleAsync.CreateConsole("TestConsole");
 
-bool managed1 = ConsoleAsync.SendCommand("TestConsole", "print one two three");  // Send command to a console by name
-bool managed2 = testConsole.SendCommand("print one two three");                  // Send command to a console by object
+bool m1 = console.SendCommand("TestConsole", "print one two");  // Send command to a console by name
+bool m2 = console.SendCommand("print one two");                 // Send command to a console by object
 ```
 Send a command to a console, return true if command was found and executed
  
