@@ -133,6 +133,11 @@ namespace AsyncronousConsole
         string ConsoleName { get; }
 
         /// <summary>
+        /// Return the actual row count of this console
+        /// </summary>
+        int RowCount { get; }
+
+        /// <summary>
         /// Scroll vievport to bottom line
         /// </summary>
         void ScrollBottom();

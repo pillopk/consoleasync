@@ -22,6 +22,11 @@ namespace AsyncronousConsole.Engine
 
         public string ConsoleName { get; private set; }
 
+        public int RowCount
+        {
+            get { return Lines.Count; }
+        }
+
         #region Events
 
         public event EventHandler<WriterOutputEventArgs> WriterOutput = null;

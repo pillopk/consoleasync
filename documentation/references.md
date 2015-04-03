@@ -79,7 +79,7 @@ Set the size of console window, the values must be greather than 60x30 character
 
 #####ConsoleAsync.AddCommandToAllConsole
 ```c#
-void AddCommandToAllConsole(string commandText, Action<IConsoleWriter, string[]> action)
+void AddCommandToAllConsole(string commandText, Action<IConsoleWriter, List<string>> action)
 ```
 Add a command to all consoles, with text specified in commandText parameter. The associated action require an [IConsoleWriter](#IConsoleWriter) parameter to write in selected console and a string array that contain all the parameter passed to a command through input. If command already exist in one console the method throws an exception
 
@@ -105,7 +105,7 @@ Send a command to a specific console, return true if console exist and command w
 ```c#
 void CommandsReceived(Action<string, bool>; action)
 ```
-The specified action will be fired at every command sended, the string parameter is the command, the boolean parameters is true if this command was managed by a console
+The specified action will be fired at every command sended, the string parameter is the command, the boolean parameters is true if command was found and managed by a console
 
 #####ConsoleAsync.Run
 ```c#
@@ -145,11 +145,11 @@ Return the writer interface to access the console output
 ```c#
 void AddKeyFilter(Func<IConsoleWriter, ConsoleKeyInfo, bool> filter)
 ```
-Add a filter to input, if the passed function return true the key will be ignored
+Add a filter to input, if the passed function return true the key will be ignored by the rest of input cicle
 
 #####IConsole.AddCommand
 ```c#
-void AddCommand(string commandText, Action<IConsoleWriter, string[]> action)
+void AddCommand(string commandText, Action<IConsoleWriter, List<string>> action)
 ```
 Add a command to console, with text specified in commandText parameter. The associated action require an [IConsoleWriter](#IConsoleWriter)
 parameter to write in selected console and a string array that contain all the parameter passed to a command through input
@@ -255,6 +255,12 @@ Writer.Text("Hey ").Info("John Doe").Text(" you are welcome !").NewLine();
 string ConsoleName { get; }
 ```
 Return the name of the parent console
+
+#####IConsoleWriter.RowCount
+```c#
+int RowCount { get; }
+```
+Return the actual row count of this console
 
 ####Output Methods
 >All write methods accepts also unescaped string like @""
@@ -427,7 +433,7 @@ Return the first characters of a string specified by length parameter
 ```c#
 string LeftRest(int length)
 ```
-Return the last characters of a string without the first characters specified by length parameter, inverse of Left function
+Return the string without the first characters specified by length parameter, inverse of Left function
 
 ```c#
 string Right(int length)
@@ -437,12 +443,12 @@ Return the last characters of a string specified by length parameter
 ```c#
 string RightRest(int length)
 ```
-Return the first characters of a string without the last characters specified by length parameter, inverse of Left function
+Return the string without the last characters specified by length parameter, inverse of Right function
 
 ```c#
 string Chunk(int startIndex, int endIndex)
 ```
-Return subset of string starting and ending from specified parameters
+Return subset of string starting and ending from specified indexes
 
 ```c#
 string Fit(int totalLength, char filler = ' ')
@@ -460,7 +466,7 @@ string RemoveChar(int charIndex)
 Return string without a specified character
 
 ```c#
-string FitMultiline(int lineLength)
+string[] FitMultiline(int lineLength)
 ```
 Cut source string in multiple lines with a length specified by lineLength parameter
 
@@ -469,6 +475,6 @@ Cut source string in multiple lines with a length specified by lineLength parame
 ```c#
 string ToFileSize()
 ```
-Return a string with the long value converted as file size (Eg. 10Bt / 10Mb / 10Gb)
+Return a string with the value converted as file size (Eg. 10Bt / 10Mb / 10Gb)
 
 [back to top](#References) - [back to summary](summary.md)
