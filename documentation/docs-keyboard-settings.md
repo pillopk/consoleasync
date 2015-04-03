@@ -11,7 +11,7 @@
 |---|-----------|
 |**TAB**|Cicle through consoles|
 |**Arrow Up/Down**|Scroll viewport one line up/down|
-|**Pageup/PageDown***|Scroll viewport one page up/down|
+|**PageUp/PageDown***|Scroll viewport one page up/down|
 |**CTRL** + **Home/End**|Scroll viewport to the top/end of the viewport output|
  
  
@@ -23,7 +23,7 @@
 |**Arrow Left/Right**|Move cursor to left/right over the command line|
 |**CTRL** + **Arrow Left/Right**|Move cursor to left/right over the command line one word at time|
 |**Home/End**|Move the cursor to the start/end of the command line|
-|**CTRL** + **Pageup/PageDown**|Cicle through previous issued commands|
+|**CTRL** + **PageUp/PageDown**|Cicle through previous issued commands|
  
  
  
