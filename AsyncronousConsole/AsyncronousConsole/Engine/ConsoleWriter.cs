@@ -1,8 +1,5 @@
 ﻿using System;
-using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using AsyncronousConsole.Support;
 
 namespace AsyncronousConsole.Engine
@@ -58,6 +55,18 @@ namespace AsyncronousConsole.Engine
         public IConsoleWriter Info(string format, params object[] parameters)
         {
             WriteInner(ConsoleColor.Cyan, format, parameters);
+            return this;
+        }
+
+        public IConsoleWriter Success(string text)
+        {
+            WriteInner(ConsoleColor.Green, text);
+            return this;
+        }
+
+        public IConsoleWriter Success(string format, params object[] parameters)
+        {
+            WriteInner(ConsoleColor.Green, format, parameters);
             return this;
         }
 

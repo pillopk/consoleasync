@@ -272,6 +272,13 @@ IConsoleWriter Info(string format, params object[] parameters)
 ```
 Write content of text parameter with information style, methos support also [String.Format](https://msdn.microsoft.com/it-it/library/b1csw23d(v=vs.110).aspx) parameters
 
+#####IConsoleWriter.Success
+```c#
+IConsoleWriter Success(string text)
+IConsoleWriter Success(string format, params object[] parameters)
+```
+Write content of text parameter with success style, methos support also [String.Format](https://msdn.microsoft.com/it-it/library/b1csw23d(v=vs.110).aspx) parameters
+
 #####IConsoleWriter.Warning
 ```c#
 IConsoleWriter Warning(string text)

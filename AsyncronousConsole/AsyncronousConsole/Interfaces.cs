@@ -163,6 +163,21 @@ namespace AsyncronousConsole
         IConsoleWriter Info(string format, params object[] parameters);
 
         /// <summary>
+        /// Write text with success style
+        /// </summary>
+        /// <param name="text">Text to be writed</param>
+        /// <returns></returns>
+        IConsoleWriter Success(string text);
+
+        /// <summary>
+        /// Write text with success style
+        /// </summary>
+        /// <param name="format">A composite format string (see String.Format)</param>
+        /// <param name="parameters">The objects to format</param>
+        /// <returns>Return console writer interface to permit fluid syntax</returns>
+        IConsoleWriter Success(string format, params object[] parameters);
+
+        /// <summary>
         /// Write text with warning style
         /// </summary>
         /// <param name="text">Text to be writed</param>
