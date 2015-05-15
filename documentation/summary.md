@@ -24,5 +24,6 @@ ConsoleAsync Documentation
 ##Developer Notes
 ------------------------------------------------------------------------
 *ConsoleAsync is not suitable for high precision asyncrony, actual precision is +/- 50 millisecond between [OnExecute](references.md#consoleworkeronexecute) cicle
+
 *Console output is never clear automatically, for long output (like application log) plan to clear console over time, consider use of [output to file](docs-console-filesoutput.md) feature
 
