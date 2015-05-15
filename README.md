@@ -1,6 +1,7 @@
 ConsoleAsync
 ------------------------------------------------------------------------
-ConsoleAsync permits multiple console with multiple asyncronous worker in the default C# Console Application
+ConsoleAsync permits multiple console with multiple asyncronous worker, customized commands,
+multiple colour text formats in the default C# Console Application
 
 ![ConsoleAsync Screenshot](documentation/AsyncronousConsoleDiagram.png "ConsoleAsync Screenshot")
 
@@ -11,3 +12,4 @@ ConsoleAsync permits multiple console with multiple asyncronous worker in the de
 5. CAPS/NUM State
 6. Warning on update of non visible console
 
+Read the [Documentation](documentation/summary.md) or visit [NuGet](http://www.nuget.org/packages/ConsoleAsync/1.0.0) page
