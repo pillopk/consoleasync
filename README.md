@@ -1,5 +1,7 @@
 ConsoleAsync
 ------------------------------------------------------------------------
+ConsoleAsync permits multiple console with multiple asyncronous worker in the default C# Console Application
+
 ![ConsoleAsync Screenshot](documentation/AsyncronousConsoleDiagram.png "ConsoleAsync Screenshot")
 
 1. Mutiple writing styles
@@ -9,4 +11,3 @@ ConsoleAsync
 5. CAPS/NUM State
 6. Warning on update of non visible console
 
-[Documentation](documentation/summary.md) is still in progress...
