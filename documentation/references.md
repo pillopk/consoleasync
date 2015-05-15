@@ -110,8 +110,10 @@ The specified action will be fired at every command sended, the string parameter
 #####ConsoleAsync.Run
 ```c#
 void Run()
+void Run(bool startAllWorker)
 ```
-This method raise the ConsoleAsync cicle, and waiting for worker or console command, until Quit method was called
+This method raise the ConsoleAsync cicle, and waiting for worker or console command, until Quit method was called.
+If startAllWorker is true all register worker will be started
 
 #####ConsoleAsync.Quit
 ```c#
@@ -360,7 +362,7 @@ Return the state of the worker (Stopped, Running, Suspended)
 
 ####Methods
 
-#####IConsoleWorker.State
+#####IConsoleWorker.Start
 ```c#
 void Start()
 ```
