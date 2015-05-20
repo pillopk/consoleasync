@@ -1,6 +1,6 @@
 ConsoleAsync
 ------------------------------------------------------------------------
-ConsoleAsync permits multiple console with multiple asyncronous worker, customized commands,
+ConsoleAsync permits multiple console with multiple asyncronous worker, customized commands, save to multiple text files,
 multiple colour text formats in the default C# Console Application
 
 ![ConsoleAsync Screenshot](documentation/AsyncronousConsoleDiagram.png "ConsoleAsync Screenshot")
